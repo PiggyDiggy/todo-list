@@ -84,4 +84,75 @@
     transform: translateX(50px);
   }
 }
+
+.waves {
+  position: absolute;
+  left: 0;
+  bottom: -50px;
+  height: 120px;
+  right: 0;
+  z-index: 4;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url("../assets/wave.png");
+  background-size: 1000px 100px;
+  background-repeat: repeat-x;
+}
+
+.wave1 {
+  animation: wave-flow 30s linear infinite;
+  z-index: 10;
+  opacity: 1;
+  animation-delay: 0s;
+  bottom: 0;
+}
+
+.wave2 {
+  animation: wave-flow2 15s linear infinite;
+  z-index: 9;
+  opacity: 0.5;
+  animation-delay: -5s;
+  bottom: 10px;
+}
+
+.wave3 {
+  animation: wave-flow 30s linear infinite;
+  z-index: 8;
+  opacity: 0.2;
+  animation-delay: -2s;
+  bottom: 15px;
+}
+
+.wave4 {
+  animation: wave-flow2 5s linear infinite;
+  z-index: 7;
+  opacity: 0.7;
+  animation-delay: -5s;
+  bottom: 20px;
+}
+
+@keyframes wave-flow {
+  0% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: 1000px;
+  }
+}
+
+@keyframes wave-flow2 {
+  0% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: -1000px;
+  }
+}
 </style>

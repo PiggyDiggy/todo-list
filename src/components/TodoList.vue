@@ -1,10 +1,11 @@
 <template>
-  <TransitionGroup tag="ul" class="todo-list">
+  <TransitionGroup tag="ul" name="todo" class="todo-list" appear>
     <Todo
-      v-for="todo in list"
+      v-for="(todo, index) in list"
       :key="todo.id"
       :todo="todo"
-      :index="getIndex(todo)"
+      :index="index"
+      :style="`transition-delay: ${0.15 * index}s`"
     />
   </TransitionGroup>
 </template>
@@ -18,11 +19,6 @@ export default {
   },
   props: {
     list: Array[Object],
-  },
-  methods: {
-    getIndex(todo) {
-      return this.list.indexOf(todo);
-    },
   },
 };
 </script>
@@ -42,5 +38,19 @@ export default {
   color: white;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.18);
   text-align: center;
+}
+
+.todo-enter-from {
+  transform: translateY(73vh);
+  opacity: 0;
+}
+
+.todo-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.todo-enter-active {
+  transition: transform 1s cubic-bezier(0, 0, 0, 1), opacity 1s ease-out;
 }
 </style>

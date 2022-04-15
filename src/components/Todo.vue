@@ -22,7 +22,7 @@
         />
         <Button
           class="todo__btn delete-btn"
-          icon="delete.svg"
+          icon="cross.svg"
           @click="deleteTodo(todo.id)"
         />
       </div>
