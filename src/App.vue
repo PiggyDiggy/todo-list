@@ -27,6 +27,7 @@ export default {
 
 :root {
   --orange: #fec89a;
+  --light-orange: #ffd6a5;
   --red: #ff9885;
   --text-main: #59504e;
   --text-light: #7a5c5c;

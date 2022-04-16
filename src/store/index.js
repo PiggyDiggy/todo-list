@@ -51,6 +51,7 @@ const store = createStore({
           id: 5,
         },
       ],
+      todoNextId: 6,
     };
   },
   mutations: {
@@ -62,6 +63,10 @@ const store = createStore({
     },
     completeTodo(state, id) {
       state.todos.find((todo) => todo.id === id).dateCompleted = new Date();
+    },
+    addTodo(state, todo) {
+      todo.id = state.todoNextId++;
+      state.todos.push(todo);
     },
   },
   getters: {
