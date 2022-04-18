@@ -14,6 +14,6 @@ git add -A
 git commit -m 'Deploy'
 
 
-git push -f git@github.com:PiggyDiggy/todo-list.git main:gh-pages
+git push -f git@github.com:PiggyDiggy/todo-list.git master:gh-pages
 
 cd -

@@ -1,5 +1,5 @@
 <template>
-  <li class="todo-wrap">
+  <li class="todo-wrap" :data-index="index">
     <div class="todo" :class="{ 'todo--important': todo.important }">
       <h2 class="todo__title">{{ todo.title }}</h2>
       <p class="todo__memo" v-if="todo.memo">{{ todo.memo }}</p>
@@ -26,12 +26,21 @@
           @click="deleteTodo(todo.id)"
         />
       </div>
+      <div class="todo__ripples">
+        <span
+          class="todo__ripple todo__complete"
+          :class="{ active: completed }"
+        ></span>
+        <span
+          class="todo__ripple todo__delete"
+          :class="{ active: deleted }"
+        ></span>
+      </div>
     </div>
   </li>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import Button from "./TodoButton.vue";
 
 export default {
@@ -42,8 +51,25 @@ export default {
     todo: Object,
     index: Number,
   },
+  data() {
+    return {
+      completed: false,
+      deleted: false,
+    };
+  },
   methods: {
-    ...mapMutations(["deleteTodo", "completeTodo"]),
+    completeTodo(id) {
+      this.completed = true;
+      setTimeout(() => {
+        this.$store.commit("completeTodo", id);
+      }, 0);
+    },
+    deleteTodo(id) {
+      this.deleted = true;
+      setTimeout(() => {
+        this.$store.commit("deleteTodo", id);
+      }, 0);
+    },
   },
   computed: {
     padIndex() {
@@ -95,12 +121,12 @@ export default {
   color: var(--text-main);
   padding-right: 88px;
   word-break: break-word;
-  transition: color 0.4s ease-out;
+  transition: color 0.3s 0.2s ease-out;
 }
 
 .todo__memo {
   color: var(--text-light);
-  transition: color 0.2s ease-out;
+  transition: color 0.2s 0.2s ease-out;
 }
 
 .todo__title,
@@ -128,10 +154,14 @@ export default {
 
 .todo__datecompleted {
   color: var(--text-main);
-  transition: color 0.3s 0.1s ease-out;
+  transition: color 0.3s 0.2s ease-out;
 }
 
-.todo--important .todo__index {
+.todo--important .todo__index,
+.todo-leave-active .todo__index,
+.todo-leave-active .todo__title,
+.todo-leave-active .todo__memo,
+.todo-leave-active .todo__datecompleted {
   color: var(--todo-bg);
 }
 
@@ -140,5 +170,38 @@ export default {
   position: absolute;
   top: -16px;
   right: 20px;
+}
+
+.todo__ripples {
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.todo__ripple {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: -3px;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0, 0, 1, 0), opacity 0.2s ease-out;
+}
+
+.todo__complete {
+  background-color: var(--green);
+  right: 116px;
+}
+
+.todo__delete {
+  background-color: var(--red);
+  right: 35px;
+}
+
+.todo__ripple.active {
+  transform: scale(240);
+  opacity: 1;
 }
 </style>
