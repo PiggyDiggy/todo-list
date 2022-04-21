@@ -17,10 +17,6 @@ export default {
 
 <style>
 #app {
-  font-family: "Signika Negative", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   height: 100%;
 }
@@ -49,6 +45,10 @@ body {
 }
 
 body {
+  font-family: "Signika Negative", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
   margin: 0;
   overflow: hidden;
 }

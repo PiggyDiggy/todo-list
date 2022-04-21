@@ -1,6 +1,10 @@
 <template>
   <li class="todo-wrap" :data-index="index">
-    <div class="todo" :class="{ 'todo--important': todo.important }">
+    <div
+      @click="viewTodo"
+      class="todo"
+      :class="{ 'todo--important': todo.important }"
+    >
       <h2 class="todo__title">{{ todo.title }}</h2>
       <p class="todo__memo" v-if="todo.memo">{{ todo.memo }}</p>
       <div class="todo__datecompleted" v-if="todo.dateCompleted">
@@ -12,7 +16,7 @@
           v-if="!todo.dateCompleted"
           class="todo__btn complete-btn"
           icon="complete.svg"
-          @click="completeTodo(todo.id)"
+          @click="completeTodo"
         />
         <Button
           v-if="!todo.dateCompleted"
@@ -23,7 +27,7 @@
         <Button
           class="todo__btn delete-btn"
           icon="cross.svg"
-          @click="deleteTodo(todo.id)"
+          @click="deleteTodo"
         />
       </div>
       <div class="todo__ripples">
@@ -36,16 +40,26 @@
           :class="{ active: deleted }"
         ></span>
       </div>
+      <teleport to="#modal">
+        <Overview
+          @close-overview="closeOverview"
+          :todo="todo"
+          v-if="todo.memo"
+          v-show="overviewActive"
+        />
+      </teleport>
     </div>
   </li>
 </template>
 
 <script>
 import Button from "./TodoButton.vue";
+import Overview from "./Overview.vue";
 
 export default {
   components: {
     Button,
+    Overview,
   },
   props: {
     todo: Object,
@@ -55,20 +69,28 @@ export default {
     return {
       completed: false,
       deleted: false,
+      overviewActive: false,
     };
   },
   methods: {
-    completeTodo(id) {
+    completeTodo() {
       this.completed = true;
       setTimeout(() => {
-        this.$store.commit("completeTodo", id);
+        this.$store.commit("completeTodo", this.todo.id);
       }, 0);
     },
-    deleteTodo(id) {
+    deleteTodo() {
       this.deleted = true;
       setTimeout(() => {
-        this.$store.commit("deleteTodo", id);
+        this.$store.commit("deleteTodo", this.todo.id);
       }, 0);
+    },
+    viewTodo() {
+      if (!this.todo.memo) return;
+      this.overviewActive = true;
+    },
+    closeOverview() {
+      this.overviewActive = false;
     },
   },
   computed: {
@@ -95,6 +117,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  text-align: left;
   padding: 1rem;
   position: relative;
   z-index: 3;
