@@ -22,7 +22,7 @@
           v-if="!todo.dateCompleted"
           class="todo__btn edit-btn"
           icon="edit.svg"
-          @click="() => {}"
+          @click="openEdit"
         />
         <Button
           class="todo__btn delete-btn"
@@ -41,12 +41,16 @@
         ></span>
       </div>
       <teleport to="#modal">
-        <Overview
-          @close-overview="closeOverview"
-          :todo="todo"
-          v-if="todo.memo"
-          v-show="overviewActive"
-        />
+        <Modal @close="closeOverview" v-if="todo.memo" v-show="overviewActive">
+          <Overview :todo="todo" />
+        </Modal>
+        <Modal
+          @close="editActive = false"
+          v-if="!todo.dateCompleted"
+          v-show="editActive"
+        >
+          <Edit :todo="todo" />
+        </Modal>
       </teleport>
     </div>
   </li>
@@ -54,12 +58,16 @@
 
 <script>
 import Button from "./TodoButton.vue";
+import Modal from "./Modal.vue";
 import Overview from "./Overview.vue";
+import Edit from "./Edit.vue";
 
 export default {
   components: {
     Button,
+    Modal,
     Overview,
+    Edit,
   },
   props: {
     todo: Object,
@@ -70,6 +78,7 @@ export default {
       completed: false,
       deleted: false,
       overviewActive: false,
+      editActive: false,
     };
   },
   methods: {
@@ -91,6 +100,10 @@ export default {
     },
     closeOverview() {
       this.overviewActive = false;
+    },
+    openEdit(e) {
+      e.stopPropagation();
+      this.editActive = true;
     },
   },
   computed: {
@@ -210,7 +223,7 @@ export default {
   border-radius: 50%;
   top: -3px;
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0, 0, 1, 0), opacity 0.2s ease-out;
+  transition: transform 0.4s cubic-bezier(0.32, 0, 0.67, 0), opacity 0.2s ease-out;
 }
 
 .todo__complete {

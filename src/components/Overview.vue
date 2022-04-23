@@ -1,18 +1,11 @@
 <template>
-  <Transition name="overview-wrapper">
-    <div class="overview-wrapper">
-      <div class="overview" :class="{ important: todo.important }">
-        <h2 class="overview__title">{{ todo.title }}</h2>
-        <p class="overview__memo">{{ todo.memo }}</p>
-        <span class="overview__datecompleted" v-if="todo.dateCompleted">
-          {{ getDate() }}
-        </span>
-      </div>
-      <div class="backdrop" @click="$emit('closeOverview')">
-        <img src="../assets/cross.svg" alt="cross" class="cross" />
-      </div>
-    </div>
-  </Transition>
+  <div class="overview" :class="{ important: todo.important }">
+    <h2 class="overview__title">{{ todo.title }}</h2>
+    <p class="overview__memo">{{ todo.memo }}</p>
+    <span class="overview__datecompleted" v-if="todo.dateCompleted">
+      {{ getDate() }}
+    </span>
+  </div>
 </template>
 
 <script>
@@ -29,30 +22,6 @@ export default {
 </script>
 
 <style>
-.overview-wrapper {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.overview-wrapper-enter-from,
-.overview-wrapper-leave-to {
-  opacity: 0;
-}
-
-.overview-wrapper-enter-to,
-.overview-wrapper-leave-from {
-  opacity: 1;
-}
-
-.overview-wrapper-enter-active,
-.overview-wrapper-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-
 .overview {
   display: flex;
   flex-direction: column;
@@ -66,7 +35,7 @@ export default {
   color: var(--text-main);
   padding: 1rem;
   border-radius: 15px;
-  box-shadow: 2px 2px 14px rgba(0, 0, 0 , 20%);
+  box-shadow: 2px 2px 14px rgba(0, 0, 0, 20%);
   z-index: 15;
 }
 

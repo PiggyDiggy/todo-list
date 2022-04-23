@@ -24,7 +24,8 @@ export default {
   position: absolute;
   bottom: 4px;
   right: 8px;
-  font-size: 0.75em;
+  font-size: 18px;
+  font-weight: bold;
   color: var(--text-main);
   cursor: pointer;
   user-select: none;
@@ -62,7 +63,7 @@ export default {
   transform: translateX(14px);
 }
 
-.fields--important .switch {
+.important .switch {
   background-color: var(--todo-bg);
 }
 </style>

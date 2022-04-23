@@ -2,7 +2,7 @@
   <div class="container">
     <form @submit="createTodo" class="create-form" autocomplete="off">
       <Transition name="fields" appear>
-        <div class="fields" :class="{ 'fields--important': important }">
+        <div class="fields" :class="{ important }">
           <Input type="title" v-model="title" />
           <Input type="memo" v-model="memo" />
           <Switch v-model="important" />
@@ -32,7 +32,9 @@ export default {
     };
   },
   methods: {
-    createTodo() {
+    createTodo(e) {
+      e.preventDefault();
+      if (!this.title) return;
       const todo = {
         title: this.title,
         memo: this.memo,
@@ -73,13 +75,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font: bold 1.5rem "Signika Negative", sans-serif;
   position: relative;
   z-index: 6;
   transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
 }
 
-.fields--important {
+.fields.important {
   background-color: var(--orange);
   border-color: white;
 }

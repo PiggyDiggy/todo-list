@@ -68,6 +68,10 @@ const store = createStore({
       todo.id = state.todoNextId++;
       state.todos.push(todo);
     },
+    editTodo(state, {title, memo, id}) {
+      const todo = state.todos.find((todo) => todo.id === id);
+      [todo.title, todo.memo] = [title, memo];
+    },
   },
   getters: {
     completed: (state) => state.todos.filter((todo) => todo.dateCompleted),

@@ -46,11 +46,15 @@ export default {
 
 <style>
 .field {
-  width: 50%;
+  width: 100%;
   position: relative;
   color: var(--text-light);
   font: inherit;
   margin: 0.5rem 0;
+}
+
+.create-form .field {
+  width: 50%;
 }
 
 #title-input {
@@ -58,7 +62,9 @@ export default {
   border: none;
   padding: 0.25rem;
   text-align: center;
-  font: inherit;
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
   color: inherit;
   background-color: transparent;
 }
@@ -73,7 +79,6 @@ export default {
   background-color: transparent;
   font-family: inherit;
   font-size: 1rem;
-  font-weight: normal;
   text-align: center;
   color: inherit;
 }
@@ -94,7 +99,7 @@ export default {
   z-index: 5;
 }
 
-.fields--important .input__background {
+.important .input__background {
   background-color: var(--todo-bg);
 }
 
@@ -102,7 +107,7 @@ export default {
   background-color: var(--orange);
 }
 
-.fields--important .field:hover .input__background {
+.important .field:hover .input__background {
   background-color: #fff1e6;
 }
 
@@ -119,9 +124,9 @@ export default {
   z-index: 6;
 }
 
-#memo-input ~ .input__placeholder {
-  font-size: 1rem;
-  font-weight: normal;
+#title-input ~ .input__placeholder {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .field:focus-within .input__placeholder,
