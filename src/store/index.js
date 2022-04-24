@@ -56,10 +56,9 @@ const store = createStore({
   },
   mutations: {
     deleteTodo(state, id) {
-      state.todos.splice(
-        state.todos.findIndex((todo) => todo.id === id),
-        1
-      );
+      const index = state.todos.findIndex((todo) => todo.id === id);
+      if (index === -1) return;
+      state.todos.splice(index, 1);
     },
     completeTodo(state, id) {
       state.todos.find((todo) => todo.id === id).dateCompleted = new Date();
@@ -68,7 +67,7 @@ const store = createStore({
       todo.id = state.todoNextId++;
       state.todos.push(todo);
     },
-    editTodo(state, {title, memo, id}) {
+    editTodo(state, { title, memo, id }) {
       const todo = state.todos.find((todo) => todo.id === id);
       [todo.title, todo.memo] = [title, memo];
     },

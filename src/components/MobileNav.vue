@@ -17,8 +17,8 @@
       d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"
     />
   </svg>
-  <Transition name="mobile-nav" @enter="onEnter">
-    <nav class="mobile-nav" v-if="navOpened">
+  <Transition name="mobile-nav" @enter="onEnter" @leave="onLeave">
+    <nav class="mobile-nav" v-show="navOpened">
       <ul class="mobile-nav__items">
         <li class="mobile-nav__item">
           <router-link
@@ -47,7 +47,7 @@
     </nav>
   </Transition>
   <Transition name="backdrop">
-    <div class="backdrop" @click="closeNav" v-if="navOpened">
+    <div class="backdrop" @click="closeNav" v-show="navOpened">
       <img class="cross" src="@/assets/cross.svg" alt="cross" />
     </div>
   </Transition>
@@ -71,6 +71,9 @@ export default {
       setTimeout(() => {
         el.classList.add("mobile-nav--opened");
       }, 0);
+    },
+    onLeave(el) {
+      el.classList.remove("mobile-nav--opened");
     },
   },
 };
@@ -172,7 +175,8 @@ export default {
 .mobile-nav__item:last-of-type {
   padding: 0;
   background-color: white;
-  border-radius: 5px;
+  border: 2px solid white;
+  border-radius: 10px;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
@@ -181,8 +185,6 @@ export default {
 
 .mobile-nav__item:last-of-type a {
   padding: 0.5rem;
-  border: 2px solid white;
-  border-radius: 5px;
   color: var(--red);
   transition: color 0.2s ease-out;
   position: relative;
@@ -192,7 +194,7 @@ export default {
 .mobile-nav__item:last-of-type > span {
   position: absolute;
   border-radius: 50%;
-  background-color: #a0c4ff;
+  background-color: var(--red);
   z-index: 2;
   width: 120px;
   height: 120px;
@@ -240,7 +242,7 @@ export default {
 .mobile-nav__item:last-of-type a:focus,
 .mobile-nav__item:last-of-type a:active {
   text-decoration: none;
-  color: var(--text-main);
+  color: white;
 }
 
 .bars-icon {

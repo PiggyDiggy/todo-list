@@ -2,20 +2,20 @@
   <nav class="main-nav">
     <ul class="main-nav__items">
       <li class="main-nav__item">
-        <router-link to="/completed">Completed</router-link>
+        <router-link class="router-link" to="/completed">Completed</router-link>
       </li>
       <li class="main-nav__item">
-        <router-link to="/current">Current</router-link>
+        <router-link class="router-link" to="/current">Current</router-link>
       </li>
       <li class="main-nav__item">
+        <router-link class="router-link" to="/create">Create</router-link>
         <span></span>
-        <router-link to="/create">Create</router-link>
       </li>
     </ul>
   </nav>
 </template>
 
-<style>
+<style scoped>
 .main-nav__items {
   list-style: none;
   padding: 0;
@@ -24,7 +24,7 @@
   align-items: center;
 }
 
-.main-nav__item a {
+.router-link {
   text-decoration: none;
   color: var(--text-main);
   font-size: 1.1rem;
@@ -33,13 +33,13 @@
   transition: color 0.1s ease-out;
 }
 
-.main-nav__item a:hover,
-.main-nav__item a:focus {
+.router-link:hover,
+.router-link:focus {
   outline: none;
   color: white !important;
 }
 
-.main-nav__item a::after {
+.router-link::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -51,8 +51,11 @@
   transition: transform 0.2s ease-out;
 }
 
-.main-nav__item a:hover::after,
-.main-nav__item a:focus::after {
+.router-link-active {
+  color: white !important;
+}
+
+.router-link-active::after {
   transform: scaleX(1);
 }
 
@@ -66,14 +69,14 @@
   overflow: hidden;
 }
 
-.main-nav__item:last-of-type a {
+.main-nav__item:last-of-type .router-link {
   color: var(--red);
   transition: color 0.2s ease-out;
   padding: 29px 1rem;
   z-index: 3;
 }
 
-.main-nav__item:last-of-type a::after {
+.main-nav__item:last-of-type .router-link::after {
   content: none;
 }
 
@@ -91,7 +94,8 @@
 }
 
 .main-nav__item:last-of-type:hover span,
-.main-nav__item:last-of-type:focus-within span {
+.main-nav__item:last-of-type:focus-within span,
+.main-nav__item:last-of-type .router-link-active + span {
   transform: scale(1);
 }
 
