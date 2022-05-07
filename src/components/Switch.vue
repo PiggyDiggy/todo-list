@@ -41,7 +41,7 @@ export default {
   position: relative;
   height: 16px;
   width: 30px;
-  margin-left: 0.5rem;
+  margin-left: 8px;
   background-color: var(--orange);
   border-radius: 50px;
   transition: background-color 0.2s ease-out;
@@ -65,5 +65,12 @@ export default {
 
 .important .switch {
   background-color: var(--todo-bg);
+}
+
+@media (max-width: 800px) {
+  .important-toggle {
+    position: static;
+    flex-direction: column;
+  }
 }
 </style>

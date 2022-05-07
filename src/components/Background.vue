@@ -33,24 +33,25 @@
   height: 100%;
   background-color: #ffe6c1;
   clip-path: polygon(0 0, 50% 0, 100% 100%, 0% 100%);
+  transition: left 0.5s ease-out;
 }
 
 .beam1 {
   z-index: 5;
-  left: -16%;
+  left: -12%;
 }
 
 .beam2 {
   animation-delay: 0.15s;
   z-index: 4;
-  left: -10%;
+  left: -4%;
   opacity: 0.5;
 }
 
 .beam3 {
   animation-delay: 0.3s;
   z-index: 3;
-  left: -4%;
+  left: 4%;
   opacity: 0.3;
 }
 
@@ -153,6 +154,24 @@
 
   100% {
     background-position-x: -1000px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .waves {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .beam1 {
+    left: -20%;
+  }
+  .beam2 {
+    left: -5%;
+  }
+  .beam3 {
+    left: 10%;
   }
 }
 </style>

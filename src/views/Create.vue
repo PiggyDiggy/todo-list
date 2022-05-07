@@ -51,7 +51,7 @@ export default {
 
 <style>
 .container {
-  height: calc(100vh - 80px - 136px);
+  height: calc(100vh - 160px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,7 @@ export default {
 
 .create-form {
   width: 75%;
-  max-width: 1250px;
+  max-width: 1000px;
 }
 
 .fields {
@@ -109,12 +109,12 @@ export default {
   box-shadow: 7px 7px 20px 0px rgb(0 0 0 / 10%);
   position: relative;
   z-index: 5;
+  cursor: pointer;
   transition: transform 0.2s ease-out, background-color 0.2s ease-out;
 }
 
 .create-btn:hover {
   transform: scale(1.05);
-  cursor: pointer;
 }
 
 .create-btn-enter-from {
@@ -127,5 +127,28 @@ export default {
 
 .create-btn-enter-active {
   transition: transform 0.6s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (max-width: 800px) {
+  .create-form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 640px) {
+  .create-form {
+    width: 90%;
+  }
+
+  .create-btn:hover,
+  .create-btn:active {
+    transform: scale(0.95);
+  }
+}
+
+@media (max-width: 400px) {
+  .create-form {
+    width: 100%;
+  }
 }
 </style>

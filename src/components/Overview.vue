@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     getDate() {
-      return this.todo.dateCompleted.toLocaleDateString("en-US");
+      return this.todo.dateCompleted.toLocaleDateString("en-GB");
     },
   },
 };

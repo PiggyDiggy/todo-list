@@ -17,44 +17,56 @@
       d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"
     />
   </svg>
-  <Transition name="mobile-nav" @enter="onEnter" @leave="onLeave">
-    <nav class="mobile-nav" v-show="navOpened">
-      <ul class="mobile-nav__items">
-        <li class="mobile-nav__item">
-          <router-link
-            to="/completed"
-            class="mobile-nav__link"
-            @click="closeNav"
-          >
-            <img src="@/assets/checkmark.svg" alt="check mark" />
-            <span>Completed</span>
-          </router-link>
-        </li>
-        <li class="mobile-nav__item">
-          <router-link to="/current" class="mobile-nav__link" @click="closeNav">
-            <img src="@/assets/clocks.svg" alt="clocks" />
-            <span>Current</span>
-          </router-link>
-        </li>
-        <li class="mobile-nav__item">
-          <span></span>
-          <router-link to="/create" class="mobile-nav__link" @click="closeNav">
-            <img src="@/assets/create.svg" alt="create" />
-            <span>Create</span>
-          </router-link>
-        </li>
-      </ul>
-    </nav>
-  </Transition>
-  <Transition name="backdrop">
-    <div class="backdrop" @click="closeNav" v-show="navOpened">
-      <img class="cross" src="@/assets/cross.svg" alt="cross" />
-    </div>
-  </Transition>
+  <teleport to="#modal">
+    <Transition name="modal-container" @enter="onEnter" @leave="onLeave">
+      <Modal v-show="navOpened" @close="closeNav">
+        <nav class="mobile-nav">
+          <ul class="mobile-nav__items">
+            <li class="mobile-nav__item">
+              <router-link
+                to="/completed"
+                class="mobile-nav__link"
+                @click="closeNav"
+              >
+                <img src="@/assets/checkmark.svg" alt="check mark" />
+                <span>Completed</span>
+              </router-link>
+            </li>
+            <li class="mobile-nav__item">
+              <router-link
+                to="/current"
+                class="mobile-nav__link"
+                @click="closeNav"
+              >
+                <img src="@/assets/clocks.svg" alt="clocks" />
+                <span>Current</span>
+              </router-link>
+            </li>
+            <li class="mobile-nav__item">
+              <span></span>
+              <router-link
+                to="/create"
+                class="mobile-nav__link"
+                @click="closeNav"
+              >
+                <img src="@/assets/create.svg" alt="create" />
+                <span>Create</span>
+              </router-link>
+            </li>
+          </ul>
+        </nav>
+      </Modal>
+    </Transition>
+  </teleport>
 </template>
 
 <script>
+import Modal from "./Modal.vue";
+
 export default {
+  components: {
+    Modal,
+  },
   data() {
     return {
       navOpened: false,
@@ -68,12 +80,14 @@ export default {
       this.navOpened = false;
     },
     onEnter(el) {
+      const nav = el.querySelector(".mobile-nav");
       setTimeout(() => {
-        el.classList.add("mobile-nav--opened");
+        nav.classList.add("mobile-nav--opened");
       }, 0);
     },
     onLeave(el) {
-      el.classList.remove("mobile-nav--opened");
+      const nav = el.querySelector(".mobile-nav");
+      nav.classList.remove("mobile-nav--opened");
     },
   },
 };
@@ -90,19 +104,12 @@ export default {
   background-color: white;
   z-index: 15;
   overflow: hidden;
-  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-}
-
-.mobile-nav-enter-from,
-.mobile-nav-leave-to {
   transform: translateX(100%);
-  opacity: 0;
+  transition: transform 0.2s ease-out;
 }
 
-.mobile-nav-enter-to,
-.mobile-nav-leave-from {
+.mobile-nav--opened {
   transform: translateX(0);
-  opacity: 1;
 }
 
 .mobile-nav::before {

@@ -7,8 +7,12 @@
     >
       <h2 class="todo__title">{{ todo.title }}</h2>
       <p class="todo__memo" v-if="todo.memo">{{ todo.memo }}</p>
-      <div class="todo__datecompleted" v-if="todo.dateCompleted">
-        {{ todo.dateCompleted }}
+      <div
+        class="todo__datecompleted"
+        v-if="todo.dateCompleted"
+        :title="todo.dateCompleted"
+      >
+        {{ getDate() }}
       </div>
       <div class="todo__index">{{ padIndex }}</div>
       <div class="todo__buttons">
@@ -41,7 +45,11 @@
         ></span>
       </div>
       <teleport to="#modal">
-        <Modal @close="closeOverview" v-if="todo.memo" v-show="overviewActive">
+        <Modal
+          @close="overviewActive = false"
+          v-if="todo.memo"
+          v-show="overviewActive"
+        >
           <Overview :todo="todo" />
         </Modal>
         <Modal
@@ -98,12 +106,19 @@ export default {
       if (!this.todo.memo) return;
       this.overviewActive = true;
     },
-    closeOverview() {
-      this.overviewActive = false;
-    },
     openEdit(e) {
       e.stopPropagation();
       this.editActive = true;
+    },
+    getDate() {
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "numeric",
+      };
+      return this.todo.dateCompleted.toLocaleString("en-GB", options);
     },
   },
   computed: {
@@ -135,7 +150,8 @@ export default {
   position: relative;
   z-index: 3;
   cursor: pointer;
-  transition: transform 1s cubic-bezier(0, 0, 0, 1), border 0.2s ease-out;
+  transition: transform 1s cubic-bezier(0, 0, 0, 1), border 0.2s ease-out,
+    box-shadow 0.2s ease-out;
 }
 
 .todo--important {
@@ -144,7 +160,8 @@ export default {
 
 .todo:hover {
   transform: scale(1.05);
-  transition: transform 0.4s ease-out, border 0.2s ease-out;
+  transition: transform 0.4s ease-out, border 0.2s ease-out,
+    box-shadow 0.2s ease-out;
   border: 2px solid var(--orange);
 }
 
@@ -191,6 +208,11 @@ export default {
 .todo__datecompleted {
   color: var(--text-main);
   transition: color 0.3s 0.2s ease-out;
+  margin-top: 8px;
+}
+
+.todo__memo ~ .todo__datecompleted {
+  margin-top: 0;
 }
 
 .todo--important .todo__index,
@@ -223,7 +245,8 @@ export default {
   border-radius: 50%;
   top: -3px;
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.32, 0, 0.67, 0), opacity 0.2s ease-out;
+  transition: transform 0.4s cubic-bezier(0.32, 0, 0.67, 0),
+    opacity 0.2s ease-out;
 }
 
 .todo__complete {
@@ -239,5 +262,32 @@ export default {
 .todo__ripple.active {
   transform: scale(240);
   opacity: 1;
+}
+
+@media (max-width: 1000px) {
+  .todo-wrap {
+    width: 80%;
+  }
+
+  .todo__ripple.active {
+    transform: scale(150);
+  }
+}
+
+@media (max-width: 640px) {
+  .todo-wrap {
+    width: 90%;
+  }
+
+  .todo:hover {
+    transform: scale(0.95);
+    box-shadow: 3px 3px 9px -2px rgb(0 0 0 / 10%);
+  }
+}
+
+@media (max-width: 400px) {
+  .todo-wrap {
+    width: 100%;
+  }
 }
 </style>

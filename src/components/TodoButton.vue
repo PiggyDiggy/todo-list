@@ -53,4 +53,11 @@ export default {
 .edit-btn {
   background-color: var(--blue);
 }
+
+@media (max-width: 640px) {
+  .todo__btn {
+    visibility: visible;
+    opacity: 1;
+  }
+}
 </style>

@@ -50,7 +50,7 @@ export default {
   position: relative;
   color: var(--text-light);
   font: inherit;
-  margin: 0.5rem 0;
+  margin: 8px 0;
 }
 
 .create-form .field {
@@ -143,5 +143,17 @@ export default {
 .input__placeholder-enter-to {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+}
+
+@media (max-width: 800px) {
+  .create-form .field {
+    width: 70%;
+  }
+}
+
+@media (max-width: 640px) {
+  .create-form .field {
+    width: 100%;
+  }
 }
 </style>

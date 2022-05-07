@@ -12,10 +12,6 @@
   </section>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style>
 .app-description {
   display: flex;
@@ -34,14 +30,13 @@ export default {};
 }
 
 .description__button {
-  margin-top: 1em;
+  margin-top: 16px;
   color: var(--text-dark);
   background-color: var(--orange);
-  padding: 1em 2em;
+  padding: 16px 32px;
   border-radius: 50px;
   text-decoration: none;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
-  transform: scale(1);
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
@@ -50,5 +45,17 @@ export default {};
   outline: none;
   transform: scale(1.05);
   box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+  .app-description {
+    width: 95%;
+  }
+
+  .description__button:hover,
+  .description__button:active {
+    transform: scale(0.95);
+    box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.1);
+  }
 }
 </style>

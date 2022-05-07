@@ -87,4 +87,10 @@ export default {
   transition: transform 0.6s 0.1s cubic-bezier(0.47, 0, 0.75, 0.72),
     height 0.3s 0.5s ease-out, opacity 0.8s ease-out;
 }
+
+@media (max-width: 640px) {
+  .section__title {
+    font-size: 2.5rem;
+  }
+}
 </style>

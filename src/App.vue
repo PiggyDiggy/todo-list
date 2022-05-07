@@ -17,7 +17,6 @@ export default {
 
 <style>
 #app {
-  color: #2c3e50;
   height: 100%;
 }
 
@@ -54,47 +53,43 @@ body {
 }
 
 main {
-  height: calc(100% - 40px);
+  height: calc(100% - 80px);
   overflow-y: overlay;
-  padding-bottom: 136px;
+  padding-bottom: 68px;
+  color: rgba(0, 0, 0, 0);
+  transition: color 0.2s ease;
 }
 
-.backdrop {
-  position: fixed;
-  inset: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10;
-  cursor: pointer;
-  transition: opacity 0.2s ease-out;
+main:hover {
+  color: rgba(0, 0, 0, 0.3);
 }
 
-.backdrop-enter-to,
-.backdrop-leave-from {
-  opacity: 1;
+main::-webkit-scrollbar {
+  width: 16px;
 }
 
-.backdrop-enter-from,
-.backdrop-leave-to {
-  opacity: 0;
+main::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px;
+  width: 8px;
+  border-radius: 50px;
+  background-clip: padding-box;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
 }
 
-.cross {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  opacity: 0.5;
-  transition: opacity 0.2s ease-out;
+main::-webkit-scrollbar-thumb:hover {
+  color: rgba(0, 0, 0, 0.5);
 }
 
-.backdrop:hover .cross {
-  opacity: 1;
+@media (max-width: 1000px) {
+  main {
+    padding-bottom: 0;
+  }
 }
 
-.todos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@media (max-width: 400px) {
+  main {
+    padding: 0 8px;
+  }
 }
 </style>
