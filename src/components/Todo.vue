@@ -179,6 +179,7 @@ export default {
 
 .todo__memo {
   color: var(--text-light);
+  margin-bottom: 0;
   transition: color 0.2s 0.2s ease-out;
 }
 
@@ -211,8 +212,8 @@ export default {
   margin-top: 8px;
 }
 
-.todo__memo ~ .todo__datecompleted {
-  margin-top: 0;
+.todo__memo + .todo__datecompleted {
+  margin-top: 16px;
 }
 
 .todo--important .todo__index,

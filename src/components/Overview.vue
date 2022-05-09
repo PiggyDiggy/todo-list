@@ -25,11 +25,10 @@ export default {
 .overview {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-width: 200px;
   min-height: 200px;
   max-width: 50%;
-  max-height: 95%;
+  max-height: 90%;
   overflow: overlay;
   background-color: var(--todo-bg);
   color: var(--text-main);
@@ -44,7 +43,7 @@ export default {
 }
 
 .overview__title {
-  margin: 0;
+  margin: auto 0 0 0;
 }
 
 .overview__memo {
@@ -55,5 +54,29 @@ export default {
 .overview__datecompleted {
   margin-top: 1em;
   color: var(--text-light);
+}
+
+.overview :last-child {
+  margin-bottom: auto;
+}
+
+.overview::-webkit-scrollbar-track {
+  margin: 10px;
+}
+
+.overview::-webkit-scrollbar-thumb {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1000px) {
+  .overview {
+    max-width: 75%;
+  }
+}
+
+@media (max-width: 640px) {
+  .overview {
+    max-width: 95%;
+  }
 }
 </style>

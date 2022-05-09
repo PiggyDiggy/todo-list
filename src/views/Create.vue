@@ -3,8 +3,8 @@
     <form @submit="createTodo" class="create-form" autocomplete="off">
       <Transition name="fields" appear>
         <div class="fields" :class="{ important }">
-          <Input type="title" v-model="title" />
-          <Input type="memo" v-model="memo" />
+          <Input type="title" v-model.trim="title" />
+          <Input type="memo" v-model.trim="memo" />
           <Switch v-model="important" />
         </div>
       </Transition>
@@ -113,8 +113,10 @@ export default {
   transition: transform 0.2s ease-out, background-color 0.2s ease-out;
 }
 
-.create-btn:hover {
+.create-btn:hover,
+.create-btn:focus {
   transform: scale(1.05);
+  outline: none;
 }
 
 .create-btn-enter-from {

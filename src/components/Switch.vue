@@ -4,7 +4,7 @@
     class="important-toggle"
   >
     <span for="important-input">Important</span>
-    <input type="checkbox" id="important-input" />
+    <input type="checkbox" id="important-input" tabindex="-1" />
     <div class="switch" :class="{ active: modelValue }"></div>
   </div>
 </template>
