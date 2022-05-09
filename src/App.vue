@@ -12,6 +12,9 @@ export default {
   components: {
     Header,
   },
+  beforeCreate() {
+    this.$store.commit("loadFromLocalStorage");
+  },
 };
 </script>
 
