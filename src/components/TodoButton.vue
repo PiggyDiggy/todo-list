@@ -54,7 +54,7 @@ export default {
   background-color: var(--blue);
 }
 
-@media (max-width: 640px) {
+@media (hover: none) {
   .todo__btn {
     visibility: visible;
     opacity: 1;

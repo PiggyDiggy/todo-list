@@ -1,8 +1,12 @@
 <template>
   <form @submit="editTodo" class="edit-container">
     <div class="todo-edit" :class="{ important: todo.important }">
-      <Input type="title" v-model="title" />
-      <Input type="memo" v-model="memo" />
+      <Field placeholder="Title" :modelValue="title">
+        <Input v-model="title" />
+      </Field>
+      <Field placeholder="Memo" :modelValue="memo">
+        <Textarea v-model="memo" />
+      </Field>
     </div>
     <Transition name="update-alert">
       <div
@@ -28,11 +32,15 @@
 </template>
 
 <script>
+import Field from "./Field.vue";
 import Input from "./Input.vue";
+import Textarea from "./Textarea.vue";
 
 export default {
   components: {
+    Field,
     Input,
+    Textarea,
   },
   props: {
     todo: Object,
@@ -73,6 +81,7 @@ export default {
   position: relative;
   z-index: 15;
   pointer-events: none;
+  max-height: 90%;
 }
 
 .todo-edit {
@@ -81,6 +90,7 @@ export default {
   justify-content: center;
   background-color: var(--todo-bg);
   color: var(--text-main);
+  width: 50%;
   padding: 1rem;
   border-radius: 15px;
   box-shadow: 2px 2px 14px rgba(0, 0, 0, 20%);
@@ -160,5 +170,17 @@ export default {
 
 .button-cancel:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+  .todo-edit {
+    width: 75%;
+  }
+}
+
+@media (max-width: 640px) {
+  .todo-edit {
+    width: 95%;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <Transition name="modal-container">
-    <div class="modal-container">
+    <div v-if="show" class="modal-container">
       <slot></slot>
       <div class="backdrop" @click="$emit('close')">
         <img src="../assets/cross.svg" alt="cross" class="cross" />
@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  props: {
+    show: Boolean,
+  },
   emits: ["close"],
 };
 </script>

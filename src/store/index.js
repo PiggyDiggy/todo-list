@@ -24,7 +24,7 @@ const store = createStore({
       const todo = state.todos.find((todo) => todo.id === id);
       [todo.title, todo.memo] = [title, memo];
     },
-    loadFromLocalStorage(s) {
+    loadFromLocalStorage() {
       const state = loadTodos();
       convertJSONToDate(state.todos);
       this.replaceState(state);
@@ -60,8 +60,7 @@ const saveNextId = (id) => {
 };
 
 store.subscribe((mutation, state) => {
-  if (mutation.type === "loadFromLocalStorage")
-    return;
+  if (mutation.type === "loadFromLocalStorage") return;
   if (mutation.type === "addTodo") saveNextId(state.todoNextId);
   saveTodos(state.todos);
 });

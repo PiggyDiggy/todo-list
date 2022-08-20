@@ -74,10 +74,9 @@ main::-webkit-scrollbar {
 main::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 0 10px;
   width: 8px;
-  border-radius: 50px;
+  border-radius: 100vmax;
   background-clip: padding-box;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
+  border: 4px solid transparent;
 }
 
 main::-webkit-scrollbar-thumb:hover {

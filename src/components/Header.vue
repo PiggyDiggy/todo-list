@@ -25,6 +25,11 @@ export default {
 </script>
 
 <style>
+.main-header {
+  position: relative;
+  z-index: 10;
+}
+
 .main-header__container {
   display: flex;
   justify-content: space-between;

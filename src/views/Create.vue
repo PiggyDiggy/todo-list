@@ -3,8 +3,12 @@
     <form @submit="createTodo" class="create-form" autocomplete="off">
       <Transition name="fields" appear>
         <div class="fields" :class="{ important }">
-          <Input type="title" v-model.trim="title" />
-          <Input type="memo" v-model.trim="memo" />
+          <Field placeholder="Title" :modelValue="title">
+            <Input v-model="title" />
+          </Field>
+          <Field placeholder="Memo" :modelValue="memo">
+            <Textarea v-model="memo" />
+          </Field>
           <Switch v-model="important" />
         </div>
       </Transition>
@@ -16,12 +20,16 @@
 </template>
 
 <script>
+import Field from "@/components/Field";
 import Input from "@/components/Input";
+import Textarea from "@/components/Textarea";
 import Switch from "@/components/Switch";
 
 export default {
   components: {
+    Field,
     Input,
+    Textarea,
     Switch,
   },
   data() {
@@ -36,8 +44,8 @@ export default {
       e.preventDefault();
       if (!this.title) return;
       const todo = {
-        title: this.title,
-        memo: this.memo,
+        title: this.title.trim(),
+        memo: this.memo.trim(),
         important: this.important,
         createdAt: new Date(),
       };
@@ -51,8 +59,9 @@ export default {
 
 <style>
 .container {
-  height: calc(100vh - 160px);
+  flex-grow: 1;
   width: 100%;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;

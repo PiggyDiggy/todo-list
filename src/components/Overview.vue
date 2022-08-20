@@ -3,7 +3,7 @@
     <h2 class="overview__title">{{ todo.title }}</h2>
     <p class="overview__memo">{{ todo.memo }}</p>
     <span class="overview__datecompleted" v-if="todo.dateCompleted">
-      {{ getDate() }}
+      {{ date }}
     </span>
   </div>
 </template>
@@ -13,8 +13,8 @@ export default {
   props: {
     todo: Object,
   },
-  methods: {
-    getDate() {
+  computed: {
+    date() {
       return this.todo.dateCompleted.toLocaleDateString("en-GB");
     },
   },
@@ -27,7 +27,7 @@ export default {
   flex-direction: column;
   min-width: 200px;
   min-height: 200px;
-  max-width: 50%;
+  width: 50%;
   max-height: 90%;
   overflow: overlay;
   background-color: var(--todo-bg);
@@ -60,23 +60,34 @@ export default {
   margin-bottom: auto;
 }
 
+.overview::-webkit-scrollbar {
+  width: 16px;
+}
+
 .overview::-webkit-scrollbar-track {
   margin: 10px;
 }
 
 .overview::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px;
+  border-radius: 100vmax;
+  border: 4px solid transparent;
   color: rgba(0, 0, 0, 0.3);
+}
+
+.overview::-webkit-scrollbar-thumb:hover {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 1000px) {
   .overview {
-    max-width: 75%;
+    width: 75%;
   }
 }
 
 @media (max-width: 640px) {
   .overview {
-    max-width: 95%;
+    width: 95%;
   }
 }
 </style>

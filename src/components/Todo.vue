@@ -6,7 +6,7 @@
       :class="{ 'todo--important': todo.important }"
     >
       <h2 class="todo__title">{{ todo.title }}</h2>
-      <p class="todo__memo" v-if="todo.memo">{{ todo.memo }}</p>
+      <p class="todo__memo" v-if="todo.memo">{{ memoTruncate }}</p>
       <div
         class="todo__datecompleted"
         v-if="todo.dateCompleted"
@@ -47,15 +47,13 @@
       <teleport to="#modal">
         <Modal
           @close="overviewActive = false"
-          v-if="todo.memo"
-          v-show="overviewActive"
+          :show="overviewActive"
         >
           <Overview :todo="todo" />
         </Modal>
         <Modal
           @close="editActive = false"
-          v-if="!todo.dateCompleted"
-          v-show="editActive"
+          :show="editActive"
         >
           <Edit :todo="todo" />
         </Modal>
@@ -125,6 +123,11 @@ export default {
     padIndex() {
       return String(this.index + 1).padStart(2, "0");
     },
+    memoTruncate() {
+      return this.todo.memo.length <= 500
+        ? this.todo.memo
+        : `${this.todo.memo.slice(0, 500)}...`;
+    },
   },
 };
 </script>
@@ -189,6 +192,7 @@ export default {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  word-break: break-all;
 }
 
 .todo__index {
