@@ -1,12 +1,18 @@
 <template>
-  <Transition name="modal-container">
-    <div v-if="show" class="modal-container">
-      <slot></slot>
-      <div class="backdrop" @click="$emit('close')">
-        <img src="../assets/cross.svg" alt="cross" class="cross" />
+  <teleport to="#modal">
+    <Transition
+      name="modal-container"
+      @enter="(el) => $emit('enter', el)"
+      @leave="(el) => $emit('leave', el)"
+    >
+      <div v-if="show" class="modal-container">
+        <slot></slot>
+        <div class="backdrop" @click="$emit('close')">
+          <img src="../assets/cross.svg" alt="cross" class="cross" />
+        </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+  </teleport>
 </template>
 
 <script>
@@ -14,7 +20,7 @@ export default {
   props: {
     show: Boolean,
   },
-  emits: ["close"],
+  emits: ["close", "enter", "leave"],
 };
 </script>
 

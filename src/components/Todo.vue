@@ -44,20 +44,12 @@
           :class="{ active: deleted }"
         ></span>
       </div>
-      <teleport to="#modal">
-        <Modal
-          @close="overviewActive = false"
-          :show="overviewActive"
-        >
-          <Overview :todo="todo" />
-        </Modal>
-        <Modal
-          @close="editActive = false"
-          :show="editActive"
-        >
-          <Edit :todo="todo" />
-        </Modal>
-      </teleport>
+      <Modal @close="overviewActive = false" :show="overviewActive">
+        <Overview :todo="todo" />
+      </Modal>
+      <Modal @close="editActive = false" :show="editActive">
+        <Edit :todo="todo" />
+      </Modal>
     </div>
   </li>
 </template>
